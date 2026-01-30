@@ -4,12 +4,13 @@
 
 FROM python:3.11-slim AS builder
 
-# Install build dependencies
+# Install build dependencies including OpenBLAS
 RUN apt-get update && apt-get install -y \
     git \
     cmake \
     build-essential \
     clang \
+    libopenblas-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone BitNet
@@ -33,9 +34,10 @@ RUN python setup_env.py -md models/BitNet-b1.58-2B-4T -q i2_s
 # Runtime image
 FROM python:3.11-slim
 
-# Install runtime dependencies
+# Install runtime dependencies including OpenBLAS
 RUN apt-get update && apt-get install -y \
     libgomp1 \
+    libopenblas0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy built artifacts

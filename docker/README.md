@@ -1,21 +1,31 @@
-# BitNet Docker (Experimental)
+# BitNet Docker (Linux Servers)
 
-⚠️ **Status: Work in Progress**
+Run BitNet 1-bit LLM in Docker on **Linux servers**.
 
-Docker runs Linux ARM64, which has different issues than macOS native.
+## Supported Platforms
 
-## Known Issues
+| Platform | Status |
+|----------|--------|
+| Linux ARM64 (AWS Graviton, etc.) | ✅ Works |
+| Linux x86_64 | ✅ Works |
+| Mac Docker Desktop | ❌ Too slow (use `../macos/` instead) |
 
-- NEON detection works (`NEON = 1`)
-- But `MATMUL_INT8 = 0`, `BLAS = 0` - some optimizations not available
-- Output may be garbled due to missing optimizations
-
-## If you want to try anyway
+## Quick Start
 
 ```bash
-./run-docker.sh
+# Build
+docker build -t bitnet-1bit .
+
+# Run chat
+docker run -it --rm bitnet-1bit
+
+# Or run single prompt
+docker run --rm bitnet-1bit ./build/bin/llama-cli \
+  -m models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf \
+  -p "Hello" -n 50 -t 8
 ```
 
-## Recommendation
+## Note for Mac Users
 
-For now, use the **macOS native** version in `../macos/` which is tested and working.
+Docker Desktop on Mac uses virtualization which makes LLM inference extremely slow.
+**Use the native macOS setup in `../macos/` instead** - it's much faster.

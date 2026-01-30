@@ -6,10 +6,10 @@ Running Microsoft's BitNet b1.58 2B model on Apple Silicon Mac.
 
 ## Choose Your Setup
 
-| Setup | Status | Description |
-|-------|--------|-------------|
-| [**macos/**](./macos/) | ✅ **Working** | Native macOS with NEON fix |
-| [**docker/**](./docker/) | ⚠️ Experimental | Docker Linux ARM64 (WIP) |
+| Setup | Platform | Status |
+|-------|----------|--------|
+| [**macos/**](./macos/) | Mac (M1/M2/M3/M4) | ✅ Ready |
+| [**docker/**](./docker/) | Linux Servers | ✅ Ready |
 
 ## TL;DR - macOS Native (Recommended)
 
