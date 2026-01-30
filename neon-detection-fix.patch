@@ -1,0 +1,21 @@
+diff --git a/ggml/src/ggml.c b/ggml/src/ggml.c
+index 121f72da..9be1a0f2 100644
+--- a/ggml/src/ggml.c
++++ b/ggml/src/ggml.c
+@@ -3794,8 +3794,14 @@ static void ggml_init_arm_arch_features(void) {
+ #elif defined(__APPLE__)
+     int oldp = 0;
+     size_t size = sizeof(oldp);
+-    if (sysctlbyname("hw.optional.AdvSIMD", &oldp, &size, NULL, 0) != 0) {
+-        oldp = 0;
++    // Fix for Apple Silicon (M1/M2/M3/M4): use correct sysctl key
++    // The key "hw.optional.AdvSIMD" doesn't exist on newer macOS/ARM
++    // The correct key is "hw.optional.arm.AdvSIMD"
++    if (sysctlbyname("hw.optional.arm.AdvSIMD", &oldp, &size, NULL, 0) != 0) {
++        // Fallback for older macOS versions
++        if (sysctlbyname("hw.optional.AdvSIMD", &oldp, &size, NULL, 0) != 0) {
++            oldp = 0;
++        }
+     }
+     ggml_arm_arch_features.has_neon = oldp;
+ 
