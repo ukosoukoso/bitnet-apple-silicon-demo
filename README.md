@@ -107,20 +107,12 @@ Tested on **Apple M4 Pro** (14-core CPU, 48GB RAM):
 The easiest way to run BitNet - no manual setup needed!
 
 ```bash
-# Clone this repo
 git clone https://github.com/ukosoukoso/bitnet-apple-silicon-demo.git
 cd bitnet-apple-silicon-demo
-
-# Run (builds automatically on first run)
 ./run-docker.sh
-
-# Or use docker-compose
-docker-compose up
 ```
 
-Then open **http://localhost:7860** in your browser.
-
-> Note: First build takes 5-10 minutes (downloads 1.1GB model + compiles).
+> First build takes 5-10 minutes (downloads 1.1GB model + compiles).
 
 ## Files in This Repo
 
