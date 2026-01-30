@@ -24,7 +24,7 @@ RUN patch -p1 < /tmp/neon-detection-fix.patch || true
 # Build BitNet
 WORKDIR /app/BitNet
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir huggingface_hub gradio
+    pip install --no-cache-dir huggingface_hub
 
 # Download model and build
 RUN python -c "from huggingface_hub import snapshot_download; snapshot_download('microsoft/BitNet-b1.58-2B-4T-gguf', local_dir='models/BitNet-b1.58-2B-4T')"
@@ -38,20 +38,14 @@ RUN apt-get update && apt-get install -y \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir gradio
-
 # Copy built artifacts
 WORKDIR /app
 COPY --from=builder /app/BitNet/build /app/build
 COPY --from=builder /app/BitNet/models /app/models
 COPY chat.py /app/
-COPY app.py /app/
-
-# Expose Gradio port
-EXPOSE 7860
 
 # Set environment
 ENV PYTHONUNBUFFERED=1
 
-# Default command - Web UI
-CMD ["python", "app.py"]
+# Default command - Terminal chat
+CMD ["python", "chat.py"]

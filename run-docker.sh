@@ -22,11 +22,6 @@ if ! docker image inspect bitnet-1bit:latest > /dev/null 2>&1; then
     docker build -t bitnet-1bit:latest .
 fi
 
-echo "🌐 Starting BitNet Web UI..."
+echo "💬 Starting BitNet Chat..."
 echo ""
-echo "   Open in browser: http://localhost:7860"
-echo ""
-echo "   Press Ctrl+C to stop"
-echo ""
-
-docker run -it --rm -p 7860:7860 bitnet-1bit:latest
+docker run -it --rm bitnet-1bit:latest

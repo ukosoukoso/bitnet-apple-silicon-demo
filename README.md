@@ -126,7 +126,6 @@ Then open **http://localhost:7860** in your browser.
 
 - `neon-detection-fix.patch` - The ARM NEON detection fix for Apple Silicon
 - `chat.py` - Terminal-based multi-turn chat script
-- `app.py` - Gradio Web UI
 - `Dockerfile` - One-click Docker setup
 - `run-docker.sh` - Easy runner script
 - `README.md` - This file
