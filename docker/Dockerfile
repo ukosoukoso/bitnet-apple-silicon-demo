@@ -44,8 +44,9 @@ COPY --from=builder /app/BitNet/build /app/build
 COPY --from=builder /app/BitNet/models /app/models
 COPY chat.py /app/
 
-# Set environment
+# Set environment - include library path for llama.so
 ENV PYTHONUNBUFFERED=1
+ENV LD_LIBRARY_PATH=/app/build/3rdparty/llama.cpp/src:/app/build/3rdparty/llama.cpp/ggml/src:/app/build/lib:/app/build/bin:$LD_LIBRARY_PATH
 
 # Default command - Terminal chat
 CMD ["python", "chat.py"]

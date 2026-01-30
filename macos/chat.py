@@ -99,11 +99,11 @@ def chat():
             result = subprocess.run(
                 cmd,
                 capture_output=True,
-                text=True,
                 timeout=120
             )
             
-            output = result.stdout + result.stderr
+            # Decode with error handling for binary data
+            output = result.stdout.decode('utf-8', errors='replace') + result.stderr.decode('utf-8', errors='replace')
             response = extract_response(output, user_input)
             
             if response:
