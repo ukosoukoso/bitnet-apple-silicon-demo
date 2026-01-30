@@ -30,6 +30,25 @@ See [`neon-detection-fix.patch`](./neon-detection-fix.patch) for the complete pa
 
 ## Quick Start
 
+### Option A: Docker (One-Click) 🐳
+
+```bash
+# Clone this repo
+git clone https://github.com/ukosoukoso/bitnet-apple-silicon-demo.git
+cd bitnet-apple-silicon-demo
+
+# Run with Docker (builds automatically on first run)
+chmod +x run-docker.sh
+./run-docker.sh
+```
+
+Or with docker-compose:
+```bash
+docker-compose run --rm bitnet
+```
+
+### Option B: Native Installation
+
 ### 1. Clone and Setup BitNet
 
 ```bash
@@ -83,10 +102,33 @@ Tested on **Apple M4 Pro** (14-core CPU, 48GB RAM):
 | Prompt eval | ~170 tokens/sec |
 | Generation | ~40-70 tokens/sec |
 
+## Docker: One-Click Setup
+
+The easiest way to run BitNet - no manual setup needed!
+
+```bash
+# Clone this repo
+git clone https://github.com/ukosoukoso/bitnet-apple-silicon-demo.git
+cd bitnet-apple-silicon-demo
+
+# Run (builds automatically on first run)
+./run-docker.sh
+
+# Or use docker-compose
+docker-compose up
+```
+
+Then open **http://localhost:7860** in your browser.
+
+> Note: First build takes 5-10 minutes (downloads 1.1GB model + compiles).
+
 ## Files in This Repo
 
 - `neon-detection-fix.patch` - The ARM NEON detection fix for Apple Silicon
-- `chat.py` - Simple multi-turn chat wrapper script
+- `chat.py` - Terminal-based multi-turn chat script
+- `app.py` - Gradio Web UI
+- `Dockerfile` - One-click Docker setup
+- `run-docker.sh` - Easy runner script
 - `README.md` - This file
 
 ## Technical Details

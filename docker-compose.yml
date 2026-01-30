@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  bitnet:
+    build: .
+    image: bitnet-1bit:latest
+    container_name: bitnet-web
+    ports:
+      - "7860:7860"
+    # For better performance on Apple Silicon
+    platform: linux/arm64
+    restart: unless-stopped
